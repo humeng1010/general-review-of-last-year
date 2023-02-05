@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户界面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .main ul>li:nth-child(2n) {
+            background-color: pink;
+        }
+
+        .main ul>li:nth-child(2n+1) {
+            background-color: skyblue;
+        }
+
+        .main ul>li:nth-child(1) {
+            cursor: pointer;
+        }
+
+        .main ul>li:nth-child(2) {
+            cursor: move;
+        }
+
+        .main ul>li:nth-child(3) {
+            cursor: text;
+        }
+
+        .main ul>li:nth-child(4) {
+            cursor: not-allowed;
+        }
+
+        input {
+            outline: none;
+        }
+
+        .main span {
+            font-size: 30px;
+        }
+
+        .main img {
+            vertical-align: bottom;
+        }
+
+        .text {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <ul>
+            <li>1.鼠标样式小手</li>
+            <li>2.鼠标样式移动</li>
+            <li>3.鼠标样式文本</li>
+            <li>4.鼠标样式禁用</li>
+        </ul>
+        <input type="text" name="" id="">
+        <br>
+        <img src="../assets/avatar.JPG" alt="" width="300"><span>gabcdefg</span>
+    </div>
+    <div class="text">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla luctus aliquam dolor, eu lacinia lorem
+            placerat
+            vulputate. Duis felis orci, pulvinar id metus ut, rutrum luctus orci. Cras porttitor imperdiet nunc, at
+            ultricies
+            tellus laoreet sit amet.
+        </p>
+    </div>
+</body>
+
+</html>

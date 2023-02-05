@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定位</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .left {
+            /* 固定定位的侧边栏技巧 */
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            background-color: pink;
+            width: 20%;
+            /* max-width: 230px; */
+            /* min-width: 160px; */
+        }
+
+        .main {
+            margin-left: 20%;
+            padding: 10px 20px 0;
+
+        }
+
+        .main .re {
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+
+        .main .ab {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+
+            background-color: pink;
+
+        }
+
+        .main .fa-re {
+            position: relative;
+            top: 400px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+
+        .main .son-ab {
+            position: absolute;
+            top: -40px;
+            right: 8px;
+            width: 0;
+            border: 20px solid transparent;
+            border-bottom: 20px solid pink;
+        }
+
+        .main .sticky {
+            position: sticky;
+            top: 0;
+            color: red;
+            background-color: pink;
+            z-index: 99;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="left">固定定位的侧边栏</div>
+    <div class="main">
+        <div class="sticky">
+            粘性定位
+        </div>
+        <hr>
+
+        <div class="re">
+            相对定位,相对于自身原本的位置移动,占有原本的位置,不脱标
+        </div>
+
+        <hr>
+
+        <div class="ab">
+            绝对定位,相对于有定位的祖先元素移动的,如果没有祖先元素或者祖先元素没有定位则以浏览器为定位document,脱标的
+        </div>
+
+        <div class="fa-re">
+            子绝父相
+            <div class="son-ab"></div>
+        </div>
+
+
+    </div>
+</body>
+
+</html>

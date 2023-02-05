@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画</title>
+    <style>
+        @keyframes move {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(50rem);
+            }
+        }
+
+        @keyframes shadow {
+            0% {
+                transform: translateX(0);
+            }
+
+            20% {
+                transform: translateX(-50%);
+            }
+
+            40% {
+                transform: translateX(50%);
+            }
+
+            60% {
+                transform: translateX(-25%);
+            }
+
+            80% {
+                transform: translateX(25%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+            /* animation: move 3s forwards; */
+        }
+
+        .err {
+            width: 200px;
+            height: 80px;
+            margin: 0 auto;
+            background-color: red;
+            animation: shadow 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <div class="err"></div>
+</body>
+
+</html>
