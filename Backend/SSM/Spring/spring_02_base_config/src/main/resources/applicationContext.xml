@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--    bean 配置 name配置别名-->
+    <bean id="bookDao" name="dao" class="com.red.dao.impl.BookDaoImpl"/>
+<!--    lazy-init 懒加载-->
+    <bean id="bookService" lazy-init="true" class="com.red.service.impl.BookServiceImpl">
+        <property name="bookDao" ref="dao"/>
+    </bean>
+<!--    scope 配置是否为单例-->
+    <bean id="book" class="com.red.entity.Book" scope="prototype"/>
+</beans>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+">
+    <bean class="com.red.dao.impl.BookDaoImpl" id="bookDao">
+        <property name="connectionNumber" value="10"/>
+        <property name="databaseName" value="db1"/>
+        <property name="array">
+            <array>
+                <value>10</value>
+                <value>11</value>
+                <value>12</value>
+                <value>13</value>
+            </array>
+        </property>
+        <property name="list">
+            <list>
+                <value>l1</value>
+                <value>l2</value>
+                <value>l3</value>
+            </list>
+        </property>
+        <property name="set">
+            <set>
+                <value>10</value>
+                <value>10</value>
+                <value>11</value>
+                <value>10</value>
+                <value>9</value>
+            </set>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="k1" value="v1"/>
+                <entry key="k2" value="v1"/>
+                <entry key="k3" value="v2"/>
+                <entry key="k4" value="v2"/>
+            </map>
+        </property>
+        <property name="properties">
+            <props>
+                <prop key="ccc">ccc</prop>
+                <prop key="username">root</prop>
+                <prop key="password">password</prop>
+            </props>
+        </property>
+
+    </bean>
+    <bean class="com.red.dao.impl.UserDaoImpl" id="userDao">
+        <constructor-arg type="java.lang.String" value="db1"/>
+        <constructor-arg type="int" value="10"/>
+    </bean>
+
+<!--    autowire 自动装配 按照类型-->
+    <bean class="com.red.service.impl.BookServiceImpl" id="bookService" autowire="byType">
+<!--        <property name="bookDao" ref="bookDao"/>-->
+<!--        <property name="userDao" ref="userDao"/>-->
+    </bean>
+
+<!--    管理第三方bean-->
+    <context:property-placeholder location="classpath:jdbc.properties" system-properties-mode="NEVER"/>
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+    </bean>
+
+    <bean class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${driver}"/>
+        <property name="jdbcUrl" value="${url}"/>
+        <property name="user" value="${username}"/>
+        <property name="password" value="${password}"/>
+    </bean>
+</beans>

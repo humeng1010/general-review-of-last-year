@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--    1.bean的实例化默认是通过无参构造器实例化的-->
+    <bean id="bookDao" class="com.red.dao.impl.BookDaoImpl"/>
+
+<!--    通过工厂对象实例化bean-->
+<!--    2.静态工厂-->
+    <bean id="orderDao" factory-method="getOrderDao" class="com.red.factory.OrderDaoFactory"/>
+
+<!--    3.实例工厂-->
+<!--        <1>.首先创建工厂的bean-->
+    <bean class="com.red.factory.UserDaoFactory" id="userDaoFactory"/>
+<!--        <2>.再通过实例化的工厂获取对象-->
+    <bean id="userDao" factory-bean="userDaoFactory" factory-method="getUserDao"/>
+
+<!--    4.实现FactoryBean接口-->
+<!--    这个创建的对象是FactoryBean中的getObject返回的对象-->
+    <bean id="userDao2" class="com.red.factory.UserDaoFactoryBean"/>
+
+</beans>
