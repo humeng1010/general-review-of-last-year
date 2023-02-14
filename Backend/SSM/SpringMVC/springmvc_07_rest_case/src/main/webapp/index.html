@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图书管理</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.3/jquery.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<div id="app" >
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Hello, world!</h1>
+      <p>...</p>
+      <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+    </div>
+    <div class="alert alert-success" role="alert" v-show="isShow">{{message}}</div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>书名</th>
+          <th>类型</th>
+          <th>描述</th>
+          <th>删除</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="book in books">
+          <td>{{book.id}}</td>
+          <td>{{book.name}}</td>
+          <td>{{book.type}}</td>
+          <td>{{book.description}}</td>
+          <td>
+            <div class="btn btn-danger" @click="deleteBook(book.id)">删除</div>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+
+<script>
+  // 关闭生产提示
+  Vue.config.productionTip = false
+  // 创建Vue实例
+  new Vue({
+    el: '#app',//el用户指定当前Vue实例为哪个容器服务，值通常为css选择器字符串
+    mounted(){
+      this.getAll()
+    },
+    methods:{
+      getAll(){
+        fetch("/books",{method:"get"}).then(res=>res.json()).then(data=>{
+          this.books = data.data;
+        })
+      },
+      deleteBook(id){
+        fetch(`/books/${id}`,{method:"delete"}).then(res=>res.json()).then(data=>{
+          this.isShow = true;
+          this.message = data.message
+          this.getAll()
+          setTimeout(()=>{
+            this.isShow = false
+          },1000)
+        })
+
+      }
+
+    },
+    data: {
+      books:[],
+      isShow:false,
+      message:"",
+    }
+  })
+</script>
+</body>
+</html>
