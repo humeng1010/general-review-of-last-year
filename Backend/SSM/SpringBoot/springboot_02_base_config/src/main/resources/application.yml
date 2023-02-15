@@ -1,0 +1,11 @@
+server:
+  port: 80
+
+info:
+  name: 张三
+  age: 19
+  tel: 010-1112223
+  hobbies:
+    - java
+    - 前端
+    - 图像处理

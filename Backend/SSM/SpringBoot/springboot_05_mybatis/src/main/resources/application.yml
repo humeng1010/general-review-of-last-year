@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql:///db1
+      username: root
+      password: 12345678
+
+mybatis:
+# mapper xml文件路径
+  mapper-locations:
+    - classpath:mapper/*.xml
+# 别名配置,方便自定义实体类返回结果书写
+  type-aliases-package: com.red.entity
+#  输出mybatis日志
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
