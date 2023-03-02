@@ -3,7 +3,17 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-<!--    bean的加载方式一:-->
-    <bean id="cat" class="com.red.entity.Cat"/>
+<!--    bean的加载方式一:XML的方式-->
+<!--    <bean id="cat" class="com.red.entity.Cat"/>-->
 
+<!--    <bean class="com.red.entity.Dog"/>-->
+<!--    <bean class="com.red.entity.Dog"/>-->
+<!--    <bean class="com.red.entity.Dog"/>-->
+
+<!--    <bean class="com.alibaba.druid.pool.DruidDataSource" id="dataSource">-->
+<!--        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>-->
+<!--        <property name="url" value="jdbc:mysql://localhost:3306/db1"/>-->
+<!--        <property name="username" value="root"/>-->
+<!--        <property name="password" value="12345678"/>-->
+<!--    </bean>-->
 </beans>
