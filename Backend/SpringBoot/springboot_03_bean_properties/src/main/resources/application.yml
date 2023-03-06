@@ -1,0 +1,11 @@
+cartoon:
+  cat:
+    name: 奥特曼
+    age: 2
+  mouse:
+    name: 小怪兽
+#    age: 4
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration
+
