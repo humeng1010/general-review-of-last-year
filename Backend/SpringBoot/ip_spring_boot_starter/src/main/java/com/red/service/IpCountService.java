@@ -1,11 +1,14 @@
 package com.red.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 public class IpCountService {
     private final Map<String,Integer> ipCountMap = new HashMap<>();
 
@@ -17,7 +20,7 @@ public class IpCountService {
 //        1.获取当前操作的ip地址
         String ip = httpServletRequest.getRemoteAddr();
 
-        System.out.println("========="+ip);
+//        log.info("当前访问的ip:{}",ip);
 //        2.根据当前的ip地址从map中取值,然后递增
         Integer count = ipCountMap.get(ip);
         if (count == null){
@@ -26,5 +29,15 @@ public class IpCountService {
             ipCountMap.put(ip,count + 1);
         }
 
+    }
+
+    /**
+     * 打印ip方法,使用springboot内置的定时任务,每隔5秒执行一次
+     */
+    @Scheduled(cron = "0/5 * * * * ?")
+    public void print(){
+        ipCountMap.forEach((k,v)->{
+            log.info("ip:{};count{}",k,v);
+        });
     }
 }
