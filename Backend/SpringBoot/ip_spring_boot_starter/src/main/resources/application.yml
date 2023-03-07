@@ -1,1 +1,8 @@
+#tools:
+#  ip:
+#    cycle: 10
+#    cycle-reset: false
+#    model: "detail"
+#    path: "/**"
+#    exclude-path: ""
 

@@ -1,0 +1,10 @@
+tools:
+  ip:
+    cycle: 5
+    cycle-reset: false
+    model: detail
+    path:
+      - "/user"
+      - "/user/**"
+    exclude-path:
+      - "/user/1"

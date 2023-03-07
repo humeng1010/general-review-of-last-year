@@ -1,5 +1,6 @@
 package com.red.service;
 
+import com.red.properties.IpProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -31,13 +32,32 @@ public class IpCountService {
 
     }
 
+    @Autowired
+    private IpProperties properties;
+
     /**
      * 打印ip方法,使用springboot内置的定时任务,每隔5秒执行一次
      */
-    @Scheduled(cron = "0/5 * * * * ?")
+//    @Scheduled(cron = "0/${tools.ip.cycle:5} * * * * ?")
+    @Scheduled(cron = "0/#{ipProperties.cycle} * * * * ?")
     public void print(){
-        ipCountMap.forEach((k,v)->{
-            log.info("ip:{};count{}",k,v);
-        });
+        if (properties.getModel().equals(IpProperties.LogModel.DETAIL.getValue())){
+            // 详细模式
+            ipCountMap.forEach((k,v)->{
+                log.info("ip:{};count{}",k,v);
+            });
+        }else if (properties.getModel().equals(IpProperties.LogModel.SIMPLE.getValue())){
+            // 极简模式:不显示访问次数
+            ipCountMap.forEach((k,v)->{
+                log.info("ip:{}",k);
+            });
+        }
+
+
+
+        if (properties.getCycleReset()){
+            //如果需要清除数据
+            ipCountMap.clear();
+        }
     }
 }

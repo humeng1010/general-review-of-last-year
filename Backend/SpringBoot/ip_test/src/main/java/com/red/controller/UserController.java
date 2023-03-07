@@ -1,21 +1,21 @@
 package com.red.controller;
 
-import com.red.service.IpCountService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
-
-    @Autowired
-    private IpCountService ipCountService;
+    @GetMapping("/{id}")
+    public String getConcurrentUserInfo(@PathVariable Integer id){
+        return "{'name':'张三','id':" + id + "}";
+    }
 
     @GetMapping
-    public String getConcurrentUserInfo(){
-        ipCountService.count();
+    public String getOtherUserInfo(){
         return "{'name':'张三'}";
     }
 }
