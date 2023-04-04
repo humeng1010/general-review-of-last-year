@@ -29,7 +29,6 @@ class Redis01QuickStartApplicationTests {
         String prefix = "name:";
         ValueOperations<String, String> stringStringValueOperations = stringRedisTemplate.opsForValue();
         stringStringValueOperations.set(prefix+"lisi","李四");
-
         String name = stringStringValueOperations.get(prefix + "lisi");
         System.out.println(name);
     }
