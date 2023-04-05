@@ -1,10 +1,12 @@
 <script setup lang="ts">
-defineProps<{ title: String }>()
+defineProps<{ title: String, disable?: any }>()
 </script>
 
 <template>
     <div class="submitBtn">
-        <input class="btn" type="button" :value="title">
+        <button class="btn" :disabled="disable">
+            {{ title }}
+        </button>
     </div>
 </template>
 

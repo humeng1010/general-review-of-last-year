@@ -1,38 +1,48 @@
 <script setup lang="ts">
 import LoginButton from './components/common/LoginButton.vue';
 import { ref } from 'vue'
+import { login as loginUser, sendMessage as sendMessage2User } from '@/api/index'
 const account = ref<String>()
 const password = ref<String>()
+
+const disable = ref(false)
+const sendMessage = async () => {
+  const res = await sendMessage2User(JSON.stringify({ account: account.value }))
+  console.log(res)
+  alert(res.isSuccess ? res.data : res.message)
+
+}
 
 const login = async () => {
   const user = {
     account: account.value,
     password: password.value
   }
-  const headers = new Headers({
-    'Content-Type': "application/json"
-  })
-  const r = await fetch("/api/user/login", { method: "post", body: JSON.stringify(user), headers })
-  const res = await r.json()
+  const res = await loginUser(JSON.stringify(user))
   console.log(res)
+}
+const changeImg = () => {
+
 }
 
 </script>
 
 <template>
   <div class="container">
-    <form class="register" action="./2.html" method="post">
+    <div class="register">
 
       <div class="usernameDiv">
-        <label for="username" class="title2">用户名:</label>
-        <input v-model="account" type="text" name="account" class="inp" autocomplete="off" placeholder="请输入用户名">
+        <label for="username" class="title2">手机号:</label>
+        <input v-model="account" type="text" name="account" class="inp" autocomplete="off" placeholder="请输入手机号">
       </div>
 
+      <LoginButton :disable="disable" @click="sendMessage" :title="'发送短信'"></LoginButton>
 
       <div class="phoneDiv">
-        <label for="phone" class="title2">密码:</label>
-        <input v-model="password" type="password" name="password" class="inp" id="phone" autocomplete="off"
-          placeholder="请输入密码">
+        <label for="phone" class="title2">验证码:</label>
+
+        <input v-model="password" @focus="changeImg" type="text" name="password" class="inp" id="phone" autocomplete="off"
+          placeholder="请输入验证码">
       </div>
 
 
@@ -43,11 +53,11 @@ const login = async () => {
       <div class="right" id="right">
       </div>
 
-    </form>
+    </div>
   </div>
 </template>
 
-<style>
+<style lang="less">
 * {
   margin: 0;
   padding: 0;
@@ -58,18 +68,8 @@ input:focus {
   outline: none;
 }
 
-body {
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  background-color: #fff;
-}
-
-.container {
-  height: 50%;
-}
-
 .container .register {
+  padding: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -114,29 +114,6 @@ body {
   font-size: 20px;
 }
 
-/* 文本框抖动动画 */
-@keyframes shake {
-  0% {
-    transform: translateX(0);
-  }
-
-  25% {
-    transform: translateX(5px);
-  }
-
-  50% {
-    transform: translateX(-5px);
-  }
-
-  75% {
-    transform: translateX(5px);
-  }
-
-  100% {
-    transform: translateX(0);
-  }
-}
-
 .container .inp {
   width: 300px;
   height: 50px;
@@ -158,25 +135,6 @@ body {
 .container .inp::placeholder {
   color: #888;
 }
-
-.container .username_error {
-  /* 使用透明度来做过渡动画 */
-  opacity: 0;
-  color: rgba(255, 0, 0, .8);
-  font-size: 14px;
-  transition: all 0.5s ease;
-  margin-left: 30px;
-}
-
-.container .phone_error {
-  opacity: 0;
-  color: rgba(255, 0, 0, .8);
-  font-size: 14px;
-  transition: all 0.5s ease;
-  margin-left: 52px;
-}
-
-
 
 .container .left {
   position: absolute;
@@ -200,12 +158,5 @@ body {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   transition: all 0.5s ease;
-}
-
-.time {
-  position: absolute;
-  bottom: 0;
-  color: #666;
-  transition: all 0.1s ease;
 }
 </style>
