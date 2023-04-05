@@ -8,7 +8,6 @@ const password = ref<String>()
 const disable = ref(false)
 const sendMessage = async () => {
   const res = await sendMessage2User(JSON.stringify({ account: account.value }))
-  console.log(res)
   alert(res.isSuccess ? res.data : res.message)
 
 }
@@ -19,7 +18,7 @@ const login = async () => {
     password: password.value
   }
   const res = await loginUser(JSON.stringify(user))
-  console.log(res)
+  alert(res.isSuccess ? res.data : res.message)
 }
 const changeImg = () => {
 
