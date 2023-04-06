@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import LoginButton from './components/common/LoginButton.vue';
+import LoginCard from './components/common/LoginCard.vue'
+
 import { ref } from 'vue'
 import { login as loginUser, sendMessage as sendMessage2User } from '@/api/index'
 const account = ref<String>()
@@ -17,19 +19,33 @@ const login = async () => {
     account: account.value,
     password: password.value
   }
-  const res = await loginUser(JSON.stringify(user))
-  alert(res.isSuccess ? res.data : res.message)
-}
-const changeImg = () => {
 
+  try {
+    const res = await loginUser(JSON.stringify(user))
+    alert(res.isSuccess ? res.data : res.message)
+  } catch (error) {
+    alert("服务端错误")
+  }
+}
+
+const tow = ref("/src/assets/images/22_open.72c00877.png")
+const three = ref("/src/assets/images/33_open.43a09438.png")
+
+const changeImg = (methods: string) => {
+  if (methods === "open") {
+    tow.value = "/src/assets/images/22_open.72c00877.png"
+    three.value = "/src/assets/images/33_open.43a09438.png"
+  } else if (methods === "close") {
+    tow.value = "/src/assets/images/22_close.0efad8c4.png"
+    three.value = "/src/assets/images/33_close.eea03c39.png"
+  }
 }
 
 </script>
 
 <template>
-  <div class="container">
-    <div class="register">
-
+  <LoginCard>
+    <template #form>
       <div class="usernameDiv">
         <label for="username" class="title2">手机号:</label>
         <input v-model="account" type="text" name="account" class="inp" autocomplete="off" placeholder="请输入手机号">
@@ -40,20 +56,20 @@ const changeImg = () => {
       <div class="phoneDiv">
         <label for="phone" class="title2">验证码:</label>
 
-        <input v-model="password" @focus="changeImg" type="text" name="password" class="inp" id="phone" autocomplete="off"
-          placeholder="请输入验证码">
+        <input v-model="password" @focus="changeImg('close')" @blur="changeImg('open')" type="text" name="password"
+          class="inp" id="phone" autocomplete="off" placeholder="请输入验证码">
       </div>
-
 
       <LoginButton @click="login" :title="'登陆'"></LoginButton>
-
-      <div class="left" id="left">
+    </template>
+    <template #footer>
+      <div class="left" id="left" :style="'background-image: url(' + tow + ');'">
       </div>
-      <div class="right" id="right">
+      <div class="right" id="right" :style="'background-image: url(' + three + ');'">
       </div>
+    </template>
 
-    </div>
-  </div>
+  </LoginCard>
 </template>
 
 <style lang="less">
@@ -141,7 +157,7 @@ input:focus {
   left: 0;
   width: 100px;
   height: 100px;
-  background-image: url("@/assets/images/22_open.72c00877.png");
+  // background-image: url("@/assets/images/22_open.72c00877.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   transition: all 0.5s ease;
@@ -153,7 +169,7 @@ input:focus {
   right: 0;
   width: 100px;
   height: 100px;
-  background: url("./assets/images/33_open.43a09438.png");
+  // background: url("./assets/images/33_open.43a09438.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   transition: all 0.5s ease;

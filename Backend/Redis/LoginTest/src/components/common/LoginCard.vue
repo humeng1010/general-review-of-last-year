@@ -26,10 +26,19 @@ setInterval(() => {
     }
     time.innerHTML = `${year}年${month}月${day}日 ${hour}:${minute}:${second}`
 }, 16)
+
 </script>
 
 <template>
-    {{ time }}
+    <div class="container">
+        <div class="register">
+
+            <slot name="form"></slot>
+
+            <slot name="footer"></slot>
+            {{ time }}
+        </div>
+    </div>
 </template>
 
 <style scoped lang="less"></style>

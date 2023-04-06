@@ -65,8 +65,7 @@ public class UserServiceImpl implements UserService {
             registerUserAccount(user.getAccount());
         }
 
-
-        return Result.ok(user);
+        return Result.ok("登陆成功");
     }
 
     private void registerUserAccount(String account){
