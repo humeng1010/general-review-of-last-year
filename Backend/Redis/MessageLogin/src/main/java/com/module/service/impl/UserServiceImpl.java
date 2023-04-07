@@ -1,6 +1,5 @@
 package com.module.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.module.entity.User;
 import com.module.mapper.UserMapper;
 import com.module.service.UserService;
